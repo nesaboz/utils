@@ -14,7 +14,7 @@ cd $repo_name || exit
 echo $repo_name >> README.md
 git config --global init.defaultBranch main
 git init
-pip install -U notebook
+pip install -U notebook jupyterlab
 conda install -c conda-forge jupyter_contrib_nbextensions
 ipython kernel install --name $repo_name --user
 conda env export > env.yml
