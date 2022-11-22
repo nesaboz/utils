@@ -5,6 +5,21 @@
 # run it as ./setup_new_project.sh <repo_name> <python_version> name, for example: ./setup_new_project.sh test_repo 3.10
 repo_name=$1
 python_ver=$2
+
+if [[ -n $repo_name ]]; then
+        :
+else
+        echo "you didn't enter repo name!"
+        exit 0
+fi
+
+if [[ -n $python_ver ]]; then
+        :
+else
+        echo "you didn't enter python version!"
+        exit 0
+fi
+
 conda init bash
 conda update conda
 yes | conda create -n $repo_name python=$python_ver
