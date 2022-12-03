@@ -6,18 +6,9 @@
 repo_name=$1
 python_ver=$2
 
-if [[ -n $repo_name ]]; then
-        :
-else
-        echo "you didn't enter repo name!"
-        exit 0
-fi
-
-if [[ -n $python_ver ]]; then
-        :
-else
-        echo "you didn't enter python version!"
-        exit 0
+if ! [[ -n $repo_name ]] || ! [[ -n $python_ver ]]; then
+  echo "you didn't enter repo name and/or python version"
+  exit 0
 fi
 
 conda init bash
@@ -29,8 +20,8 @@ cd $repo_name || exit
 echo $repo_name >> README.md
 git config --global init.defaultBranch main
 git init
-pip install -U notebook jupyterlab
-conda install -c conda-forge jupyter_contrib_nbextensions
+pip install -U notebook jupyterlab torch torchvision matplotlib
+yes | conda install -c conda-forge jupyter_contrib_nbextensions
 ipython kernel install --name $repo_name --user
 conda env export > env.yml
 git add .
